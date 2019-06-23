@@ -1,0 +1,114 @@
+#N canvas 3 22 1656 962 10;
+#X obj 200 192 jblr.record a;
+#X obj 200 148 adc~ 1;
+#X obj 275 149 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X floatatom 200 230 10 0 0 0 - - -;
+#X text 269 231 ms;
+#X obj 712 244 jblr.play a;
+#X floatatom 890 109 5 0 1 0 - - -;
+#X msg 890 136 high \$1;
+#X floatatom 836 109 5 0 1 0 - - -;
+#X msg 836 136 low \$1;
+#X msg 774 135 speed \$1;
+#X floatatom 774 109 5 0.25 1 0 - - -;
+#X floatatom 947 110 5 0 1 0 - - -;
+#X msg 947 136 goto \$1;
+#X obj 712 290 dac~;
+#X msg 720 135 dir -1;
+#X floatatom 775 291 10 0 0 0 - - -;
+#X text 844 292 loop position (0-1);
+#X msg 626 175 stop;
+#X msg 711 114 dir 1;
+#N canvas 954 334 726 596 snapshot~ 0;
+#X obj 308 292 snapshot~;
+#X obj 333 260 metro 50;
+#X obj 308 164 inlet~;
+#X obj 333 233 loadbang;
+#X obj 308 321 outlet;
+#X connect 0 0 4 0;
+#X connect 1 0 0 0;
+#X connect 2 0 0 0;
+#X connect 3 0 1 0;
+#X restore 775 268 pd snapshot~;
+#X text 121 148 audio input;
+#X text 196 90 ---JBLR.RECORD---;
+#X text 297 148 record/stop;
+#X text 769 71 ---JBLR.PLAY---;
+#X text 134 313 -- left inlet = audio in;
+#X text 134 297 -- argument to jblr.record object = buffer name;
+#X text 134 328 -- right inlet = (1 \, record / 0 \, stop);
+#X text 134 344 -- outlet = recording length in milliseconds;
+#X text 653 375 -- argument to jblr.play = recorded buffer to reference
+;
+#X text 654 604 -- "goto" (0-1) jumps playback to relative position
+in SUBLOOP.;
+#X msg 662 175 resume;
+#X msg 583 175 start;
+#X text 653 537 -- "speed" message sets playback speed. default is
+1x.;
+#X text 653 554 -- "low" messgage sets subloop start (0 = beginning
+of recorded buffer \, 1 = end). default is 0;
+#X text 654 586 -- "high" messgage sets subloop end. default is 1;
+#X text 654 692 -- "start" begins playback from subloop start when
+direction is forward \, from subloop end when direction is backward.
+;
+#X text 654 735 -- "stop" stops playback.;
+#X text 651 489 MESSAGES;
+#X text 653 392 -- left outlet (signal) = audio out;
+#X text 653 508 -- "dir 1" message = play forward / "dir -1" = play
+backward. default is forward.;
+#X text 654 753 -- "resume" resumes playback from the last playhead
+position.;
+#X text 653 409 -- right outlet (signal) = relative playback position
+in associated buffer (0-1);
+#X msg 1003 136 autoplay \$1;
+#X obj 1003 111 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X text 291 192 record into buffer named "a";
+#X msg 981 202 buffer b;
+#X msg 921 201 buffer a;
+#X text 654 785 -- "buffer" message plus the name of a buffer defined
+by any jblr.record object \, changes playback to that buffer immediately.
+playback will pick up at the same relative position in the newly referenced
+buffer.;
+#X text 655 634 -- "autoplay 1" turns on autoplay \, which automatically
+begins playback from buffer start upon end of recording in currently
+associated jblr.record buffer. "autoplay 0" turns off autoplay. default
+is on.;
+#X obj 1297 130 adc~ 1;
+#X obj 1372 131 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X floatatom 1297 212 10 0 0 0 - - -;
+#X text 1366 213 ms;
+#X text 1221 129 audio input;
+#X text 1394 130 record/stop;
+#X obj 1297 174 jblr.record b;
+#X text 1388 174 record into buffer named "b";
+#X connect 0 0 3 0;
+#X connect 1 0 0 0;
+#X connect 2 0 0 1;
+#X connect 5 0 14 0;
+#X connect 5 0 14 1;
+#X connect 5 1 20 0;
+#X connect 6 0 7 0;
+#X connect 7 0 5 0;
+#X connect 8 0 9 0;
+#X connect 9 0 5 0;
+#X connect 10 0 5 0;
+#X connect 11 0 10 0;
+#X connect 12 0 13 0;
+#X connect 13 0 5 0;
+#X connect 15 0 5 0;
+#X connect 18 0 5 0;
+#X connect 19 0 5 0;
+#X connect 20 0 16 0;
+#X connect 31 0 5 0;
+#X connect 32 0 5 0;
+#X connect 43 0 5 0;
+#X connect 44 0 43 0;
+#X connect 46 0 5 0;
+#X connect 47 0 5 0;
+#X connect 50 0 56 0;
+#X connect 51 0 56 1;
+#X connect 56 0 52 0;

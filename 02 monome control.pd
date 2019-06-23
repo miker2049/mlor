@@ -1,0 +1,132 @@
+#N canvas 0 22 1676 1006 10;
+#X declare -lib OSC -lib mrpeach;
+#X obj 465 -342 jblr.record a;
+#X obj 465 -386 adc~ 1;
+#X obj 540 -385 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X msg 982 -373 speed \$1;
+#X floatatom 982 -399 5 0.25 2 0 - - -;
+#X obj 982 -270 dac~;
+#X floatatom 1045 -269 10 0 0 0 - - -;
+#X msg 880 -372 stop;
+#N canvas 954 334 726 596 snapshot~ 0;
+#X obj 308 292 snapshot~;
+#X obj 333 260 metro 50;
+#X obj 308 164 inlet~;
+#X obj 333 233 loadbang;
+#X obj 308 321 outlet;
+#X connect 0 0 4 0;
+#X connect 1 0 0 0;
+#X connect 2 0 0 0;
+#X connect 3 0 1 0;
+#X restore 1045 -292 pd snapshot~;
+#X text 386 -386 audio input;
+#X text 562 -386 record/stop;
+#X msg 916 -372 resume;
+#X msg 837 -372 start;
+#X text 556 -342 record into buffer named "a";
+#X msg 1124 -373 buffer b;
+#X msg 1064 -373 buffer a;
+#X obj 461 -136 adc~ 1;
+#X obj 536 -135 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X text 382 -136 audio input;
+#X text 558 -136 record/stop;
+#X text 552 -92 record into buffer named "a";
+#X obj 461 -92 jblr.record b;
+#X obj 982 -316 jblr.play a;
+#X obj 349 164 jblr.monome.row 0 a;
+#X obj 350 75 jblr.monome 180;
+#X msg 980 -128 speed \$1;
+#X floatatom 980 -154 5 0.25 2 0 - - -;
+#X obj 980 -24 dac~;
+#X floatatom 1043 -23 10 0 0 0 - - -;
+#X msg 878 -126 stop;
+#N canvas 954 334 726 596 snapshot~ 0;
+#X obj 308 292 snapshot~;
+#X obj 333 260 metro 50;
+#X obj 308 164 inlet~;
+#X obj 333 233 loadbang;
+#X obj 308 321 outlet;
+#X connect 0 0 4 0;
+#X connect 1 0 0 0;
+#X connect 2 0 0 0;
+#X connect 3 0 1 0;
+#X restore 1043 -46 pd snapshot~;
+#X msg 914 -126 resume;
+#X msg 835 -126 start;
+#X msg 1118 -128 buffer b;
+#X msg 1058 -128 buffer a;
+#X obj 980 -70 jblr.play b;
+#X text 468 -427 ---BUFFER A---;
+#X text 980 -430 ---PLAYHEAD A---;
+#X text 457 -173 ---BUFFER B---;
+#X text 972 -184 ---PLAYHEAD B---;
+#X text 1186 -129 dynamically change buffer;
+#X text 1190 -375 dynamically change buffer;
+#X text 490 100 - argument = rotation of the grid in degrees (default
+= 0);
+#X text 488 249 - argument 2 = [jblr.play] object to control/display
+;
+#X text 490 161 - [jblr.monome.row] links a horizontal row of the monome
+grid to a [jblr.play] object. this establishes a two-way connection:
+the grid row controls parameters in [jblr.play] and also displays its
+current playhead position.;
+#X text 488 272 - in this example \, the 1st (row 0) row of the grid
+is used to display/control the [jblr.play] obbject named 'a' and the
+2nd (row 1) row of the grid is used to display/control the [jb.play]
+object named 'b'.;
+#X text 489 335 - after recording \, the grid row will display the
+current playhead position \, with display (but not playback) quantized
+to 16 steps. if playback direction is forward \, the playhead will
+move left-to-right \; if backward \, right-to-left.;
+#X text 489 406 - when the buffer that [jblr.play] is referencing is
+recorded into \, the entire row of the grid will flash to indicate
+that recording is in progress. note that this remains true even if
+the buffer that the [jb.play] object is referencing is dynamically
+changed. the monome row will always display/control the [jblr.play]
+object whose name it shares via argument \, however \, even if its
+referenced buffer is dynamically changed.;
+#X text 921 179 - using two-finger gestures \, one can define subloops
+in each row. selecting a minimum looppoint then a maximum loopoint
+plays the subloop forward \, max looppoint then min looppoint plays
+it in reverse.;
+#X text 919 242 - a single button press in any row allow one to skip
+to a relative position in the subloop. this means that button presses
+are always contextual to the defined subloop \, providing maximum resolution.
+;
+#X text 924 160 MONOME PERFORMANCE GESTURES;
+#X text 489 72 - instatiating [jblr.monome] links an active monome
+grid into the jblr system;
+#X text 1112 -22 playhead position (0-1);
+#X text 1114 -268 playhead position (0-1);
+#X text -38 -448 MONOME CONTROL OF JBLR.PLAY;
+#X text 488 220 - argument 1 = row of the grid to use (0-7 for a 128
+grid in landscape);
+#X obj 349 186 jblr.monome.row 1 b;
+#X connect 1 0 0 0;
+#X connect 2 0 0 1;
+#X connect 3 0 22 0;
+#X connect 4 0 3 0;
+#X connect 7 0 22 0;
+#X connect 8 0 6 0;
+#X connect 11 0 22 0;
+#X connect 12 0 22 0;
+#X connect 14 0 22 0;
+#X connect 15 0 22 0;
+#X connect 16 0 21 0;
+#X connect 17 0 21 1;
+#X connect 22 0 5 0;
+#X connect 22 0 5 1;
+#X connect 22 1 8 0;
+#X connect 25 0 35 0;
+#X connect 26 0 25 0;
+#X connect 29 0 35 0;
+#X connect 30 0 28 0;
+#X connect 31 0 35 0;
+#X connect 32 0 35 0;
+#X connect 33 0 35 0;
+#X connect 34 0 35 0;
+#X connect 35 0 27 0;
+#X connect 35 0 27 1;
+#X connect 35 1 30 0;
