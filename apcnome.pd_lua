@@ -48,6 +48,7 @@ function apcnome:initialize(name, atoms)
   self.outlets = 2
   self.inlets = 2
   return true
+  --adding comments and stuff
 end
 
 function apcnome:in_1(sel,list)
