@@ -7,6 +7,9 @@ local apcGrid ={{56,57,58,59,60,61,62,63},
                 {8,9,10,11,12,13,14,15},
                 {0,1,2,3,4,5,6,7}
               }
+--these are the keys in the apc to the side of our apcGrid
+--they are up to down, so 82 is the auxkey to row 0
+local auxKeyrow = {82,83,84,85,86,87,88,89}
 
 local function toBits(num)
   -- returns a table of bits, least significant first.

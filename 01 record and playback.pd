@@ -39,7 +39,7 @@
 #X text 134 297 -- argument to jblr.record object = buffer name;
 #X text 134 328 -- right inlet = (1 \, record / 0 \, stop);
 #X text 134 344 -- outlet = recording length in milliseconds;
-#X text 653 375 -- argument to jblr.play = recorded buffer to reference
+#X text 573 375 -- argument to jblr.play = recorded buffer to reference
 ;
 #X text 654 604 -- "goto" (0-1) jumps playback to relative position
 in SUBLOOP.;
@@ -85,6 +85,13 @@ is on.;
 #X text 1394 130 record/stop;
 #X obj 1297 174 jblr.record b;
 #X text 1388 174 record into buffer named "b";
+#X obj 778 324 * 8;
+#X obj 818 337 floor;
+#X floatatom 818 359 5 0 0 0 - - -;
+#X obj 1110 423 mlorCtl;
+#X obj 1117 474 print;
+#X obj 1083 359 change;
+#X obj 1102 396 list prepend 1;
 #X connect 0 0 3 0;
 #X connect 1 0 0 0;
 #X connect 2 0 0 1;
@@ -100,6 +107,7 @@ is on.;
 #X connect 12 0 13 0;
 #X connect 13 0 5 0;
 #X connect 15 0 5 0;
+#X connect 16 0 58 0;
 #X connect 18 0 5 0;
 #X connect 19 0 5 0;
 #X connect 20 0 16 0;
@@ -112,3 +120,9 @@ is on.;
 #X connect 50 0 56 0;
 #X connect 51 0 56 1;
 #X connect 56 0 52 0;
+#X connect 58 0 59 0;
+#X connect 59 0 60 0;
+#X connect 60 0 63 0;
+#X connect 61 0 62 0;
+#X connect 63 0 64 0;
+#X connect 64 0 61 0;
