@@ -9,7 +9,7 @@ local apcGrid ={{56,57,58,59,60,61,62,63},
               }
 --these are the keys in the apc to the side of our apcGrid
 --they are up to down, so 82 is the auxkey to row 0
-local auxKeyrow = {82,83,84,85,86,87,88,89}
+local auxcol = {82,83,84,85,86,87,88,89}
 
 local function toBits(num)
   -- returns a table of bits, least significant first.
@@ -105,5 +105,10 @@ function apcnome:in_2(sel,list)
       vel = 0
     end
     self:outlet(2,"list",{"/monome/grid/key",x,y,vel})
+  end
+
+  if list[1]>(auxcol[1]-1) and list[1]< (auxcol[#auxcol] + 1) then
+    local auxkey = list[1]-auxcol[1]
+    self:outlet(2,"list",{"/monome/grid/auxkey",auxkey,list[2]})
   end
 end

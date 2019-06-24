@@ -25,6 +25,8 @@
 #X text 318 164 record into buffer named "b";
 #X obj 227 164 jblr.record \$1;
 #X msg 50 120 stop;
+#X obj 310 64 inlet;
+#X obj 329 85 t b;
 #X connect 2 0 3 0;
 #X connect 3 0 0 0;
 #X connect 3 1 5 0;
@@ -35,3 +37,5 @@
 #X connect 8 0 13 0;
 #X connect 9 0 13 1;
 #X connect 14 0 3 0;
+#X connect 15 0 16 0;
+#X connect 16 0 9 0;

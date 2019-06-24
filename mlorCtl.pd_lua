@@ -1,5 +1,6 @@
 local keybuf = {}
 local trackbuf = {{},{},{},{},{},{},{},{}}
+
 --because pd doesnt like $1 as numbers...
 local letter2num ={a=0,b=1,c=2,d=3,e=4,f=5,g=6,h=7}
 local mlor = pd.Class:new():register("mlorCtl")
@@ -55,6 +56,17 @@ function mlor:in_2(sel,list)
         self:outlet(2,"playctl",{row,"goto",relativegoto})
       end
       keybuf[list[2]] = {}
+    end
+  end
+  if sel == "/monome/grid/auxkey" then
+    local recled = {"/monome/grid/led/level/row", 0, list[1], 11,11,11,11,11,11,11,11}
+    if list[2] ~= 0 then
+      self:outlet(2,"playctl",{list[1], "stop"})
+      self:outlet(2,"recctl",{list[1],list[2]})
+      self:outlet(1, "ledctl",recled)
+    else
+      self:outlet(2,"recctl",{list[1],list[2]})
+      self:outlet(2,"playctl",{list[1], "start"})
     end
   end
 end
