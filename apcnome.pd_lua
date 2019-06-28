@@ -106,7 +106,7 @@ function apcnome:in_2(sel,list)
     end
     self:outlet(2,"list",{"/monome/grid/key",x,y,vel})
   end
-
+--this is probably goign to break for non apc
   if list[1]>(auxcol[1]-1) and list[1]< (auxcol[#auxcol] + 1) then
     local auxkey = list[1]-auxcol[1]
     self:outlet(2,"list",{"/monome/grid/auxkey",auxkey,list[2]})
